@@ -1,10 +1,15 @@
+import React from "react";
 import axios from "axios";
+// import Pagination from "./pagination";
 import { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
+// import { paginate } from "../../utils/paginate";
 
-const Test = () => {
-  const [state, setState] = useState([]);
-  //   const [userList, setUserList] = useState("100");
+export default function () {
+  const [apiData, setApiData] = useState([]);
+  // const [state, setState] = useState({
+  //   currentPage: 1,
+  //   pageSize: 10,
+  // });
 
   useEffect(() => {
     getUsers();
@@ -15,53 +20,50 @@ const Test = () => {
       .get("https://jsonplaceholder.typicode.com/posts")
       .then(function (response) {
         console.log(response.data);
-        setState(response.data);
+        setApiData(response.data);
       });
   }
 
-  //   const deleteUser = (id) => {
-  //     console.log(id);
-  //     axios
-  //       .delete(`http://192.168.0.186/api/customers?customerId=${id}`)
-  //       .then(function (response) {
-  //         console.log(response.data);
-  //         alert("Deleted successfully!");
-  //         getUsers();
-  //         // setState();
-  //       });
-  //   };
+  // handlePageChange = (page) => {
+  //   console.log(page);
+  //   this.setState({ currentPage: page });
+  // };
+
+  // const allData = paginate(apiData, currentPage, pageSize);
 
   return (
-    <>
-      <div className="container-fluid">
-        <table width="100%" className="table table-hover">
-          <thead>
-            <tr className="bg-secondary text-white">
-              <th>Id</th>
-              <th>Name</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Created Date</th>
-              <th>Operations</th>
+    <div className="container-fluid">
+      {`Total number of movies ${apiData.length}`}
+      <table width="100%" className="table table-hover">
+        <thead>
+          <tr className="bg-secondary text-white">
+            <th>UserId</th>
+            <th>Title</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          {apiData.map((customer, key) => (
+            <tr key={key}>
+              <td>{customer.userId}</td>
+              <td>{customer.title}</td>
+              <td>{customer.body}</td>
             </tr>
-          </thead>
-          <tbody>
-            {state.map((customer, key) => (
-              <tr key={key}>
-                <td>{customer.userId}</td>
-                {/* <td>{customer.name}</td>
-                  <td>{customer.mobileNo}</td>
-                  <td>{customer.email}</td>
-                  <td>{customer.address}</td>
-                  <td>{customer.insertedAt}</td> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        {/* <Pagination
+          itemsCount={count}
+          // Here is "count" movie length set in "itemsCount" all row numbers
+          pageSize={pageSize}
+          // How many rows shown on the page
+          currentPage={currentPage}
+          // Default set currentPage 1, For when first load page on web....
+          onPageChange={handlePageChange}
+          // Action on button change
+        /> */}
       </div>
-    </>
+    </div>
   );
-};
-
-export default Test;
+}
