@@ -1,14 +1,15 @@
-import "./App.css";
+import React, { Component } from "react";
 import Movies from "./components/movies";
-import Test from "./components/common/test";
 
 class App extends Component {
   render() {
     return (
-      <main className="container">
-        <Movies />
-        {/* <Test /> */}
-      </main>
+      <div>
+        <main className="container">
+          <Movies />
+          {/* <Test /> */}
+        </main>
+      </div>
     );
   }
 }
