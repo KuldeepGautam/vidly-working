@@ -59,7 +59,8 @@ class Movies extends Component {
               selectedItem={this.state.selectedGenre}
               onItemChange={this.handleGenreSelect}
             />
-          </div>
+<<<<<<< HEAD
+          </div >
           <div className="col-lg-9">
             <p>Showing {filtered.length} movies in the database.</p>
             <table className="table">
@@ -107,9 +108,59 @@ class Movies extends Component {
               // Action on button change
               />
             </div>
+=======
+>>>>>>> 40fc61f9144dec3d1eeae154c3119b5a7a63afcc
           </div>
-        </div>
-      </React.Fragment>
+          <div className="col-lg-9">
+            <p>Showing {filtered.length} movies in the database.</p>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Genre</th>
+                  <th>Stock</th>
+                  <th>Rate</th>
+                  <th>Action</th>
+                  <th>Like</th>
+                </tr>
+              </thead>
+              <tbody>
+                {movies.map((movie) => (
+                  <tr key={movie._id}>
+                    <td>{movie.title}</td>
+                    <td>{movie.genre.name}</td>
+                    <td>{movie.numberInStock}</td>
+                    <td>{movie.dailyRentalRate}</td>
+                    <td>
+                      <button
+                        onClick={() => this.handleDelete(movie)}
+                        className="btn btn-danger btn-sm"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                    <td>
+                      <Like />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div>
+              <Pagination
+                itemsCount={filtered.length}
+                // Here is "count" movie length set in "itemsCount" all row numbers
+                pageSize={pageSize}
+                // How many rows shown on the page
+                currentPage={currentPage}
+                // Default set currentPage 1, For when first load page on web....
+                onPageChange={this.handlePageChange}
+                // Action on button change
+              />
+            </div>
+          </div>
+        </div >
+      </React.Fragment >
     );
   }
 }
