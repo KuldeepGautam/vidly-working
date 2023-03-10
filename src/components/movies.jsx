@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Like from "./common/like";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import ListGroup from "./common/listGroup";
+import MovieTable from "./common/movieTable";
 
 class Movies extends Component {
   // Here is "state" holds the status of component
@@ -63,39 +63,7 @@ class Movies extends Component {
           </div>
           <div className="col-lg-9">
             <p>Showing {filtered.length} movies in the database.</p>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Genre</th>
-                  <th>Stock</th>
-                  <th>Rate</th>
-                  <th>Action</th>
-                  <th>Like</th>
-                </tr>
-              </thead>
-              <tbody>
-                {movies.map((movie) => (
-                  <tr key={movie._id}>
-                    <td>{movie.title}</td>
-                    <td>{movie.genre.name}</td>
-                    <td>{movie.numberInStock}</td>
-                    <td>{movie.dailyRentalRate}</td>
-                    <td>
-                      <button
-                        onClick={() => this.handleDelete(movie)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                    <td>
-                      <Like />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <MovieTable movies={movies} onDelete={this.handleDelete} />
             <div>
               <Pagination
                 itemsCount={filtered.length}
